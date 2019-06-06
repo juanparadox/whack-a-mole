@@ -1,0 +1,108 @@
+/** OVERRIDES **/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    color: #5d4037;
+}
+button[type='button'] {
+    border-radius: 3rem;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: opacity .3s ease-in;
+}
+button[type='button']:hover {
+    opacity: .8;
+}
+h1 {
+    font-size: 5rem;
+}
+button[disabled] {
+    background-color: #e0e0e0;
+    pointer-events: none;
+}
+
+/** STATE **/
+.--hidden {
+    display: none;
+}
+
+/** WELCOME SCREEN **/
+.welcome-screen {
+    width: 100%;
+    padding: 3rem;
+}
+.welcome-screen [type='button'] {
+    margin: 1rem 0;
+}
+.welcome-screen p {
+    color: #8d6e63;
+}
+
+/** GAME **/
+.game {
+    margin: auto;
+    padding: 3rem;
+}
+header {
+    display: flex;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+}
+footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+footer button {
+    margin-right: 1rem;
+}
+footer button:last-child {
+    margin: 0;
+}
+.--reset {
+    background-color: #ba68c8;
+}
+.--stop {
+    background-color: #e57373;
+}
+.--start {
+    background-color: #aed581;
+}
+.group {
+    margin-right: 1rem;
+}
+.playing-field {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+.hole {
+    height: 80px;
+    background: url('./img/hole.svg') center bottom no-repeat;
+    background-size: contain;
+    flex: 1 0 33%;
+    position: relative;
+    margin-bottom: 3rem;
+}
+.mole {
+    position: absolute;
+    width: 80px;
+    top: 5rem;
+    opacity: 0;
+    transition: opacity .2s ease-in-out, top .5s ease-in-out;
+    cursor: pointer;
+    left: 50%;
+    margin-left: -40px;
+}
+.--up {
+    top: -2rem;
+    opacity: 1;
+}
