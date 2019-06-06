@@ -30,7 +30,7 @@ button[disabled] {
 }
 
 /** STATE **/
-.--hidden {
+.-hidden {
     display: none;
 }
 
@@ -47,9 +47,10 @@ button[disabled] {
 }
 
 /** GAME **/
-.game {
+main {
     margin: auto;
     padding: 3rem;
+    display: block;
 }
 header {
     display: flex;
@@ -67,13 +68,13 @@ footer button {
 footer button:last-child {
     margin: 0;
 }
-.--reset {
+.-reset {
     background-color: #ba68c8;
 }
-.--stop {
+.-stop {
     background-color: #e57373;
 }
-.--start {
+.-start {
     background-color: #aed581;
 }
 .group {
@@ -102,7 +103,7 @@ footer button:last-child {
     left: 50%;
     margin-left: -40px;
 }
-.--up {
+.-up {
     top: -2rem;
     opacity: 1;
 }

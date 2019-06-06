@@ -4,6 +4,13 @@ let highScore = 0;
 let gameTime = 30;
 let lengthInterval;
 
+/** Create our own forEach (for loop w/ callback) */
+function forLoop(iterative, callback) {
+    for(let i = 0; i < iterative.length; i++) {
+        callback(iterative[i]);
+    }
+}
+
 /** Gets milliseconds based on a ceiling */
 function getMilliseconds(ceiling) {
     return Math.random() * ceiling * 1000;
@@ -12,9 +19,9 @@ function getMilliseconds(ceiling) {
 /** Hides a mole */
 function hideMole(mole) {
     const timeout = getMilliseconds(3) + 1000;
-    moleTimeouts.push(setTimeout(() => {
+    moleTimeouts.push(setTimeout(function () {
         // Remove class to hide the mole
-        mole.classList.remove('--up');
+        mole.classList.remove('-up');
         showMole(mole);
     }, timeout));
 }
@@ -22,9 +29,9 @@ function hideMole(mole) {
 /** Shows a mole */
 function showMole(mole) {
     const timeInterval = getMilliseconds(10);
-    moleTimeouts.push(setTimeout(() => {
+    moleTimeouts.push(setTimeout(function () {
         // Add class to show the mole
-        mole.classList.add('--up');
+        mole.classList.add('-up');
         hideMole(mole);
     }, timeInterval));
 }
@@ -50,8 +57,8 @@ function updateCurrentScore() {
 }
 
 /** Handles a mole click by hiding the mole and updating the score */
-function handleMoleClick({ target }) {
-    target.classList.remove('--up');
+function handleMoleClick(event) {
+    event.target.classList.remove('-up');
     updateCurrentScore();
 }
 
@@ -66,7 +73,7 @@ function updateCountdown() {
     setCountdown(gameTime);
     // If time is up, at 0
     if (!gameTime) {
-        setCountdown(`Time's up!`);
+        setCountdown("Time's up!");
         clearInterval(lengthInterval);
         handleStopGame();
     }
@@ -75,14 +82,14 @@ function updateCountdown() {
 /** Handles the click of the start button and begins the game */
 function handleStartGame() {
     // Hide welcome screen
-    document.getElementById('welcome-screen').classList.add('--hidden');
+    document.getElementById('welcome-screen').classList.add('-hidden');
     // Show game
-    document.getElementById('game').classList.remove('--hidden');
+    document.getElementById('game').classList.remove('-hidden');
     const moles = document.querySelectorAll('.mole');
     // Game length timer
     lengthInterval = setInterval(updateCountdown, 1000);
     // Add intervals and click events for each mole
-    moles.forEach(mole => {
+    forLoop(moles, function (mole) {
         mole.addEventListener('click', handleMoleClick);
         showMole(mole);
     });
@@ -93,14 +100,14 @@ function handleStartGame() {
 /** Stops the game in motion */
 function handleStopGame() {
     // Clear all timeouts
-    moleTimeouts.forEach(timeout => clearTimeout(timeout));
+    forLoop(moleTimeouts, function (timeout) { clearTimeout(timeout) });
     clearInterval(lengthInterval);
 }
 
 /** Resets the game to starting point */
 function handleResetGame() {
     const moles = document.querySelectorAll('.mole');
-    moles.forEach(mole => mole.classList.remove('--up'));
+    forLoop(moles, function (mole) { mole.classList.remove('-up') });
     clearInterval(lengthInterval);
     handleStopGame();
     gameTime = 30;
